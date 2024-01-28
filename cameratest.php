@@ -248,6 +248,7 @@ input.checkboxbig {
 <div id="error-compleet">
 <?php 
 
+//Kijk of er een foto_map bestaat als niet error
 //echo $_SESSION['foto_map'];
 if (
         empty($_SESSION['foto_map'])
@@ -358,13 +359,14 @@ if (!empty($_POST['foto']) and strlen($_POST['foto']) > 50 )
     
     <!--buttons-->
     <div class="controls">
-        
+        <!--niet in gebruik-->
         <button type="image" class="btn btn-danger play" style="display: none;" title="Play">
           <img src="../tablet/images/Play_icon.png" style="height: 30px; width: 30px; border-radius: 90%;">
         </button>
         <button type="image" class="btn btn-info pause d-none" style="display: none;" title="Pause">
           <img src="../tablet/images/Pause_icon.png" style="height: 30px; width: 30px; border-radius: 90%;">
         </button>
+      <!--niet in gebruik einde-->
         <button type="image" id="button-screenshot" class="btn btn-outline-success screenshot d-none" title="ScreenShot">
           <img src="../tablet/images/camera_icon.jpg" style="height: 30px; width: 30px; border-radius: 90%;">
         </button>
@@ -385,7 +387,8 @@ if (!empty($_POST['foto']) and strlen($_POST['foto']) > 50 )
     
     document.getElementById(doel).style.visibility = action; 
 }
-
+  
+// Selecteer het HTML-video-element opdrachten
 const controls = document.querySelector('.controls');
 const cameraOptions = document.querySelector('.video-options>select');
 const video = document.querySelector('video');
@@ -393,7 +396,8 @@ const canvas = document.querySelector('canvas');
 const screenshotImage = document.querySelector('#capturefotovandiv');
 const buttons = [...controls.querySelectorAll('button')];
 let streamStarted = false;
-
+  
+// Destructureren van de "buttons" array, waarin alle knopelementen zijn opgeslagen
 const [play, pause, screenshot] = buttons;
 
 //video settings
@@ -416,7 +420,7 @@ const constraints = {
   }
 };
 
-
+//beschikbare camera-apparaten?
 const getCameraSelection = async () => {
   const devices = await navigator.mediaDevices.enumerateDevices();
   const videoDevices = devices.filter(device => device.kind === 'videoinput');
@@ -426,7 +430,8 @@ const getCameraSelection = async () => {
   cameraOptions.innerHTML = options.join('');
   //geencamera()
 };
-
+  
+//gebruik ik niet nu
 play.onclick = () => {
   if (streamStarted) {
     video.play();
@@ -444,12 +449,13 @@ play.onclick = () => {
     startStream(updatedConstraints);
   }
 };
-
+  
+//haal een mediastream op van het apparaat van de gebruiker 
 const startStream = async (constraints) => {
   const stream = await navigator.mediaDevices.getUserMedia(constraints);
   handleStream(stream);
 };
-
+// wijst de mediastream toe aan het srcObject-attribuut van het videoveld. Het verbergt het afspeelknopje, laat het pauzeknopje zien
 const handleStream = (stream) => {
   video.srcObject = stream;
   play.classList.add('d-none');
@@ -471,7 +477,8 @@ cameraOptions.onchange = () => {
   cameraopslaan();
   
 };
-
+  
+//Sla de camera op die je hebt gegeven
 function cameraopslaan()
       {
         //alert('test');
@@ -506,13 +513,13 @@ function cameraopslaan()
           
 
       }
-
+//niet in gebruik
 const pauseStream = () => {
   video.pause();
   play.classList.remove('d-none');
   pause.classList.add('d-none');
 };
-
+//maken van een screenshot van de videostream 
 const doScreenshot = () => {
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
@@ -525,15 +532,14 @@ const doScreenshot = () => {
 pause.onclick = pauseStream;
 screenshot.onclick = doScreenshot;
 
-
+//Het blok voor Cancel & Save en foto
 function PrintDiv(screenshotImage) {
   //var data=document.getElementById(capturefotovandiv).outerHTML;
-
-
   //var myWindow = window.open('', '', 'height=200,width=500');
   //window.location(); height=200,width=500
   var myWindow = 
-  //image
+    
+  //image van gemaakte foto
   ("<img style=\"with: 700px; max-height: 250px; display: block; margin-left: auto; margin-right: auto;\" src=\"" + screenshotImage.src +"\">") +
   ('<br> <br> <br> <br>') +
   //Button cancel of save
@@ -545,7 +551,7 @@ function PrintDiv(screenshotImage) {
 
 }
 
-
+//als er camera is dan ga naar cancel & save blok
   function doeiets()
   {
     //alert(' doe iets:' + localStorage.checkbox);
@@ -556,7 +562,7 @@ function PrintDiv(screenshotImage) {
 }
   
 
-
+//check of autosave gechecked is
 function lsRememberMe() {
   //alert('functie');
   if (document.getElementById("yesklik").checked === true) {
@@ -567,9 +573,9 @@ function lsRememberMe() {
   }
 }
 
-
+//
 function lsRememberMeonload() {
- 
+ //kijken of autosave/yeskllik is gechecked als niet is dan niks
  kiescamerabijladen();
   if (localStorage.checkbox  == 1) {
     //alert('zet vink aan')
@@ -579,7 +585,7 @@ function lsRememberMeonload() {
     //alert('zet vink uit')
     document.getElementById("yesklik").checked = false;;
   }
-
+//kijken of opslag_balk is gechecked als niet is dan niks
   if (localStorage.opslag_balk  == 1) {
     //alert('zet vink aan')
     document.getElementById("opslag_balk").checked = true;
@@ -608,7 +614,8 @@ function toggleautosave()
 
   
 };
-
+  
+//opslagbalk/informatiebalk
 function opslagbalk()
 {
   
@@ -622,6 +629,7 @@ function opslagbalk()
   lsRememberMeonload() ;
 };
 
+//als geen 2 camera's zijn dan error 
 //document.getElementById("selectie").style.visibility = "hidden";
 function geencamera()
 {
@@ -640,16 +648,9 @@ if ( document.getElementById("selectie").options.length < 2)
     //alert('Geen bruikbare camera gevonden.');
     };
 }
-    
-
 </script>
-
-
-<!--Css style voor alles-->
-
 </body>
 </html>
-
 <?php
 geenfotomap:
 ?>
