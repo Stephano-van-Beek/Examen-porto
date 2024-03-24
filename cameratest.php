@@ -1,7 +1,7 @@
 <?php 
 /*
 
-LET OP WERK ALLEEN HTTPS VOOR PRIVACY!!!!!!!
+LET OP DIT WERKT ALLEEN MET EEN HTTPS VERBINDING IN VERBAND MET PRIVACY!!!!!!!
 
 $_SESSION['foto_map'] = "C:/Fototest/test1/";  bij het aanropen hier de opslaglocatie in vermelden.
 
@@ -248,7 +248,7 @@ input.checkboxbig {
 <div id="error-compleet">
 <?php 
 
-//Kijk of er een foto_map bestaat als niet error
+//Kijk of er een foto_map bestaat indien dat niet het geval is toon een error
 //echo $_SESSION['foto_map'];
 if (
         empty($_SESSION['foto_map'])
@@ -273,14 +273,12 @@ if (
         </div>
     </div>
 <?php
-
+//Stagebegeleider gemaak ik niet!
 goto geenfotomap;
 
 };
 
 //$_SESSION['foto_map'] = getcwd() ."/";
-
-
 
 
 //if click button save. save image in huidige datum
@@ -302,7 +300,7 @@ if (!empty($_POST['foto']) and strlen($_POST['foto']) > 50 )
             }
             else
             {
-                //help kan niet opslaan
+                //Indien niet mogelijk om opgeslagen te worden toon dan error.
                 ?><div><h12 style="color: red;">Error1: iets fout gegaan. Niet opgeslagen<img src="./images/caution-sign.png" width="60" height="50"></h></div><div id="locatiebalk"></div><?php
                 
                 fclose($bestand);
@@ -478,7 +476,7 @@ cameraOptions.onchange = () => {
   
 };
   
-//Sla de camera op die je hebt gegeven
+//Sla de camera gegevens op die je hebt gegeven.
 function cameraopslaan()
       {
         //alert('test');
@@ -575,7 +573,7 @@ function lsRememberMe() {
 
 //
 function lsRememberMeonload() {
- //kijken of autosave/yeskllik is gechecked als niet is dan niks
+ //kijken of autosave/yesklik is gechecked als niet is dan niks
  kiescamerabijladen();
   if (localStorage.checkbox  == 1) {
     //alert('zet vink aan')
@@ -651,6 +649,7 @@ if ( document.getElementById("selectie").options.length < 2)
 </script>
 </body>
 </html>
+<!--Heb ik niet gemaak-->
 <?php
 geenfotomap:
 ?>
